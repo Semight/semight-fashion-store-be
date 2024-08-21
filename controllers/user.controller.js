@@ -39,6 +39,21 @@ class UserController {
       return res.status(500).json({ error: "An error occurred during registration" });
     }
   };
+
+  getProfile = async (req, res) => {
+    try {
+      const userId = req.user._id; // The user ID extracted from the token
+      const user = await User.findById(userId).select('-password'); // Exclude the password
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
+
+  
 }
 
 module.exports = UserController;
