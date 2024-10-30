@@ -6,8 +6,8 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   category: { type: String, required: true },
   description: { type: String },
-  size: { type: String },
-  image: { type: String }, // URL or path to the image
+  sizes: [{ type: String }],
+  images: [{ type: String }], // URL or path to the image
   // Add other fields if necessary
 });
 
