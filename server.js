@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // MongoDB Connection
 mongoose.connect(
   `mongodb://127.0.0.1:27017/semight-store`
-);
+).catch(error => console.error("Error connecting to MongoDB:", error));
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -23,10 +23,12 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 // Sample Route
 app.get('/', (req, res) => {
