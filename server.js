@@ -10,8 +10,10 @@ const port = process.env.PORT || 8000;
 
 // Middleware
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set the body size limit to 10MB or any size you find appropriate
+app.use(bodyParser.json({ limit: '15mb' }));
+app.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
 
 // MongoDB Connection
 mongoose.connect(
@@ -23,7 +25,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB');
 });
-
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
