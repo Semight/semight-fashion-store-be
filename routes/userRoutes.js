@@ -11,5 +11,7 @@ router.get("/users/:id", authMiddleware, controller.getUserById); // Get user by
 router.get("/profile", authMiddleware, controller.getProfile);
 router.put("/profile", authMiddleware, controller.updateProfile);
 router.delete("/users/byId/:id", authMiddleware, controller.deleteUser);
+router.post("/forgot-password", controller.forgotPassword);
+router.post("/reset-password/:token", controller.resetPassword);
 
 module.exports = router;
