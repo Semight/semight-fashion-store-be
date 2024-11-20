@@ -184,7 +184,9 @@ forgotPassword = async (req, res) => {
 // Reset Password Endpoint
 resetPassword = async (req, res) => {
   try {
-    const { token, newPassword } = req.body;
+    const { newPassword } = req.body;
+    console.log("New Password:", newPassword);
+    const { token } = req.params; // Get the token from the URL parameter
 
     // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
